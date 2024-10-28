@@ -1,3 +1,101 @@
+import User from '../models/user-model.js';
+import Email from '../models/email-model.js';
+import Phone from '../models/phone-model.js';
+
+function list(req, res) {
+  const { page = 1, filter = '' } = req.query;
+  const users = User.paginate(parseInt(page), filter);
+  res.render('users', { users });
+}
+
+function create(req, res) {
+  if (req.method === 'GET') {
+    res.render('userForm');
+  } else {
+    const { name, cpf, profile, emails, phones } = req.body;
+    const userId = User.create({ name, cpf, profile });
+    emails.forEach(email => Email.add(userId, email));
+    phones.forEach(phone => Phone.add(userId, phone));
+    res.redirect('/users');
+  }
+}
+
+function edit(req, res) {
+  const userId = req.params.id;
+  if (req.method === 'GET') {
+    const user = User.findById(userId);
+    const emails = Email.getByUser(userId);
+    const phones = Phone.getByUser(userId);
+    res.render('userForm', { user, emails, phones });
+  } else {
+    const { name, emails, phones } = req.body;
+    User.update(userId, { name });
+    emails.forEach(email => Email.add(userId, email));
+    phones.forEach(phone => Phone.add(userId, phone));
+    res.redirect('/users');
+  }
+}
+
+function remover(req, res) {
+  const userId = req.params.id;
+  User.delete(userId);
+  res.redirect('/users');
+}
+
+export { list, create, edit, remover };
+
+
+
+// import User from '../models/userModel.js';
+// import Email from '../models/emailModel.js';
+// import Phone from '../models/phoneModel.js';
+// import { UserDao } from "../models/user-dao.js";
+
+// class UserController {
+//   static list(req, res) {
+//     const { page = 1, filter = '' } = req.query;
+//     const users = User.paginate(parseInt(page), filter);
+//     res.render('users', { users });
+//   }
+
+//   static create(req, res) {
+//     if (req.method === 'GET') {
+//       res.render('userForm');
+//     } else {
+//       const { name, cpf, profile, emails, phones } = req.body;
+//       const userId = User.create({ name, cpf, profile });
+//       emails.forEach(email => Email.add(userId, email));
+//       phones.forEach(phone => Phone.add(userId, phone));
+//       res.redirect('/users');
+//     }
+//   }
+
+//   static edit(req, res) {
+//     const userId = req.params.id;
+//     if (req.method === 'GET') {
+//       const user = User.findById(userId);
+//       const emails = Email.getByUser(userId);
+//       const phones = Phone.getByUser(userId);
+//       res.render('userForm', { user, emails, phones });
+//     } else {
+//       const { name, emails, phones } = req.body;
+//       User.update(userId, { name });
+//       emails.forEach(email => Email.add(userId, email));
+//       phones.forEach(phone => Phone.add(userId, phone));
+//       res.redirect('/users');
+//     }
+//   }
+
+//   static delete(req, res) {
+//     const userId = req.params.id;
+//     User.delete(userId);
+//     res.redirect('/users');
+//   }
+// }
+
+// export default UserController;
+
+/*
 import { UserDao } from "../models/user-dao.js";
 import { User } from "../models/user-model.js";
 
@@ -25,12 +123,6 @@ function paginaAddUser(req, res) {
     res.render('users-formulario', { data });
 }
 
-// TRATAMENTO DE ERROS
-// TRATAMENTO DE INPUT (REQ.BODY TEM QUE SER VALIDO)
-// LOGS
-// TRATAMENTO DE ERRO COM O BANCO
-// AUTENTICACAO
-// AUTORIZAÇÃO
 function addUser(req, res) {
     try {
         console.log({ rota: "/users/add", data: req.body })
@@ -79,3 +171,4 @@ export {
 
     detalhaUser,
 };
+*/

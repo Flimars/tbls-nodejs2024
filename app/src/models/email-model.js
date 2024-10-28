@@ -15,9 +15,7 @@ class email {
     }
 }
 
-export {
-    email
-}
+export default email;
 
 // Exemplo de uso:
 // const email = new Email('exemplo', 'dominio.com');

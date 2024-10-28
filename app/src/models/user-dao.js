@@ -24,21 +24,47 @@
 
 
 import { db } from "../config/database.js";
-import { User } from "./user-model.js";
+// import { User } from "./user-model.js";
 
 class UserDao {
+
     list() {
-        const stmt = db.prepare('SELECT * FROM users');
-        // const stmt = db.prepare('SELECT name, email FROM users');
+        const stmt = db.prepare('SELECT * FROM users LIMIT 100');
         const users = stmt.all();
         console.log({ users })
         
         return users;
     }
 
-    save({ name, email, password, createdAt }) {
-        const stmt = db.prepare('INSERT INTO users (name, email, password, created_at) VALUES (@name, @email, @password, @createdAt)');
+    save({ name, email, password, profile, createdAt }) {
+        const stmt = db.prepare('INSERT INTO users (name, email, password, created_at) VALUES (@name, @email, @password, @profile, @createdAt)');
         stmt.run({name, email, password, createdAt});
+    }
+
+    findById(id) {
+        const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
+        return stmt.get(id);
+    }
+
+    update(id, updatedData) {
+        const { name } = updatedData;
+        const stmt = db.prepare('UPDATE users SET name = ? WHERE id = ?');
+        stmt.run(name, id);
+    }
+    
+    delete(id) {
+        const stmt = db.prepare('DELETE FROM users WHERE id = ? AND profile != "ADMIN"');
+        stmt.run(id);
+    }
+
+    paginate(page, filter) {
+        const limit = 5;
+        const offset = (page - 1) * limit;
+        const stmt = db.prepare(`SELECT * FROM users
+          WHERE name LIKE ?
+          LIMIT ? OFFSET ?
+        `);
+        return stmt.all(`%${filter}%`, limit, offset);
     }
 }
 

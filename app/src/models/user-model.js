@@ -1,8 +1,10 @@
 class User {
-    constructor(name, email, password, createdAt) {
+    constructor(name, email, profile, password,createdAt) {
         this.name = name;
         this.email = email;
+        this.profile = profile;
         this.password = password;
+        
         if (createdAt) {
             this.createdAt = createdAt;
         } else {
@@ -13,6 +15,4 @@ class User {
     }
 }
 
-export {
-    User
-}
+export default User;

@@ -13,9 +13,7 @@ class phone {
     }
 }
 
-export {
-   phone
-}
+export default phone;
 
 // Exemplo de uso
 // const telefone = new NumeroTelefone(55, 21, '1234-5678', '101');

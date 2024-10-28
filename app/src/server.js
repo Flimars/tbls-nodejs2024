@@ -6,7 +6,9 @@
 //  "type": "module",   no package.json para forcar o projeto para um modulo js
 
 // const express = require('express');
+
 import express from 'express';
+import usersRoutes from './routes/users-routes.js';
 
 const app = express();
 
