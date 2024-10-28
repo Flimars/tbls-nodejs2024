@@ -1,2 +1,84 @@
 # tbls-nodejs2024
-Repositório criado para os trabalho realizados na disciplina de Web II.
+Repositório criado para os trabalhos realizados na disciplina de Web II.
+
+# Membros do Trabalho:
+
+* Flávio de Medeiros Lima;
+* Katiane Santana Abreu Lima.
+___
+
+# Descrição do Trabalho:
+
+Trabalho II
+
+Data de Entrega: 27/10/2024 Enviar via SIGAA o link para acesso a um repositório do Github.
+
+Implementação de CRUD de Usuários com NodeJS, Express e SQLite
+
+Objetivo: Desenvolver uma aplicação web utilizando NodeJS, Express e SQLite que permita a gestão de usuários através de um CRUD (Create, Read, Update, Delete), utilizando HTML como template para as páginas. A aplicação deve atender aos requisitos de negócio especificados.
+
+Descrição do Sistema: O sistema deve permitir o gerenciamento de usuários e seus dados, seguindo as regras abaixo:
+
+Cadastro de Usuários:
+
+O CPF deve ser único para cada usuário.
+O perfil do usuário (ADMIN ou CLIENTE) deve ser definido automaticamente no cadastro inicial (sem interferência do usuário).
+A página de cadastro de usuários deve ser acessível através da rota /addUser.
+Listagem de Usuários:
+
+A listagem de usuários deve ser paginada, exibindo 5 usuários por página.
+Deve ser possível filtrar os usuários pelo nome.
+A listagem deve ser acessível pela rota /users.
+Detalhes do Usuário:
+
+A página de detalhes de um usuário deve exibir todas as informações pessoais (CPF, nome, perfil, etc.), além de múltiplos telefones e emails cadastrados para o usuário.
+Apenas um telefone e um email podem ser marcados como principal.
+A rota para acessar os detalhes de um usuário deve ser /user/:id.
+Exclusão de Usuários:
+
+O sistema deve permitir a exclusão de usuários, exceto aqueles com perfil ADMIN.
+A exclusão deve ser acessada pela rota /deleteUser/:id.
+Atualização de Usuários:
+
+O sistema deve permitir a atualização dos dados dos usuários, exceto o CPF e o perfil (ADMIN/CLIENTE), que são imutáveis.
+Todos os outros campos podem ser atualizados, incluindo telefones e emails, permitindo também a definição de um telefone e um email principal.
+A atualização deve ser acessível pela rota /updateUser/:id.
+Multiplicidade de Telefones:
+
+Cada usuário deve poder ter múltiplos telefones, com apenas um marcado como principal (relação 1:N).
+Multiplicidade de Emails:
+
+Cada usuário deve poder ter múltiplos emails, com apenas um marcado como principal (relação 1:N).
+Requisitos Técnicos:
+
+Banco de Dados: Utilize SQLite para persistir os dados.
+Backend: Utilize NodeJS com o framework Express para construir as rotas e lidar com as operações de CRUD.
+Frontend: Utilize HTML com templates (EJS) para renderizar as páginas de cadastro, listagem, detalhes e atualização de usuários.
+Paginação e Filtro: Implemente paginação na listagem de usuários e um filtro pelo nome dos usuários.
+Atividades:
+
+Criar o Banco de Dados:
+
+Defina as tabelas para armazenar os usuários, seus telefones e emails.
+Assegure que a tabela de usuários tenha uma coluna de CPF única e que o perfil seja definido na criação (ADMIN ou CLIENTE).
+Implementar as Rotas de CRUD:
+
+Rota /addUser: Exibir o formulário de cadastro de usuários e processar o cadastro.
+Rota /users: Exibir a listagem de usuários com paginação e filtro por nome.
+Rota /user/:id: Exibir os detalhes de um usuário específico, incluindo telefones e emails.
+Rota /deleteUser/:id: Permitir a exclusão de usuários, com validação para impedir a exclusão de ADMINs.
+Rota /updateUser/:id: Exibir o formulário de atualização de dados do usuário, exceto CPF e perfil, permitindo a edição de telefones e emails.
+Atenção: apesar da especificidade das rotas, todas as funcionalidades da aplicação devem ser acessíveis via interação do usuário com a página, isto é, deve ser possível clicar em um botão ou link para adicionar um usuário, atualizar ou deletar.
+
+Validar as Regras de Negócio:
+
+Implementar validações para garantir que o CPF seja único.
+Certificar-se de que os perfis (ADMIN/CLIENTE) não possam ser alterados após o cadastro.
+Garantir que a exclusão de usuários ADMIN seja bloqueada.
+Avaliação: O projeto será avaliado com base nos seguintes critérios:
+
+O trabalho pode ser realizado individualmente ou em dupla. No caso de duplas, coloque os nomes da PÁGINA INICIAL e no README.md
+Implementação correta das funcionalidades.
+Atendimento às regras de negócio.
+Qualidade do código (organização, clareza, boas práticas).
+Funcionalidade do sistema (correção de bugs e usabilidade).
