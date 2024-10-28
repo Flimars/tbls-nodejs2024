@@ -1,0 +1,28 @@
+<!-- views/users/userDetail.ejs -->
+<%- include('includes/header', { title: 'User Details' }) %>
+
+<div class="bg-white shadow-md rounded p-6">
+  <h2 class="text-2xl font-semibold mb-4"><%= user.name %> - Details</h2>
+  <p><strong>CPF:</strong> <%= user.cpf %></p>
+  <p><strong>Email:</strong> <%= user.email %></p>
+  <p><strong>Phone:</strong> <%= user.phone %></p>
+  <p><strong>Role:</strong> <%= user.role %></p>
+
+  <h3 class="text-xl font-semibold mt-4">Emails</h3>
+  <ul>
+    <% emails.forEach(email => { %>
+      <li><%= email.email %> <%= email.is_primary ? '(Primary)' : '' %></li>
+    <% }) %>
+  </ul>
+
+  <h3 class="text-xl font-semibold mt-4">Phones</h3>
+  <ul>
+    <% phones.forEach(phone => { %>
+      <li><%= phone.phone %> <%= phone.is_primary ? '(Primary)' : '' %></li>
+    <% }) %>
+  </ul>
+</div>
+
+<%- include('includes/footer') %>
+
+

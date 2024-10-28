@@ -1,0 +1,59 @@
+<!-- views/users/users.ejs -->
+<%- include('includes/header', { title: 'User List' }) %>
+
+<div class="bg-white shadow-md rounded p-6">
+  <form action="/users" method="GET" class="mb-4">
+    <input type="text" name="name" placeholder="Filter by name" class="p-2 border border-gray-300 rounded">
+    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
+  </form>
+  
+  <table class="min-w-full table-auto">
+    <thead>
+      <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+        <th class="py-3 px-6 text-left">ID</th>
+        <th class="py-3 px-6 text-left">Name</th>
+        <th class="py-3 px-6 text-left">CPF</th>
+        <th class="py-3 px-6 text-left">Email</th>
+        <th class="py-3 px-6 text-left">Phone</th>
+        <th class="py-3 px-6 text-left">Role</th>
+        <th class="py-3 px-6 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(user => { %>
+        <tr class="border-b border-gray-200 hover:bg-gray-100">
+          <td class="py-3 px-6"><%= user.id %></td>
+          <td class="py-3 px-6"><%= user.name %></td>
+          <td class="py-3 px-6"><%= user.cpf %></td>
+          <td class="py-3 px-6"><%= user.email %></td>
+          <td class="py-3 px-6"><%= user.phone %></td>
+          <td class="py-3 px-6"><%= user.role %></td>
+          <td class="py-3 px-6">
+            <a href="/user/<%= user.id %>" class="text-blue-500">View</a> | 
+            <a href="/updateUser/<%= user.id %>" class="text-yellow-500">Edit</a> | 
+            <a href="/deleteUser/<%= user.id %>" class="text-red-500">Delete</a>
+          </td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  
+  <!-- Paginação -->
+  <div class="flex justify-between items-center mt-4">
+    <span>Showing <%= pagination.current %> of <%= pagination.total %> entries</span>
+    <nav class="inline-flex shadow-sm">
+      <!-- Botões de paginação -->
+      <% if (pagination.prevPage) { %>
+        <a href="/users?page=<%= pagination.prevPage %>" class="px-3 py-1 bg-gray-300 text-gray-800">Previous</a>
+      <% } %>
+      <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+        <a href="/users?page=<%= i %>" class="px-3 py-1 <%= i === pagination.currentPage ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-800' %>"><%= i %></a>
+      <% } %>
+      <% if (pagination.nextPage) { %>
+        <a href="/users?page=<%= pagination.nextPage %>" class="px-3 py-1 bg-gray-300 text-gray-800">Next</a>
+      <% } %>
+    </nav>
+  </div>
+</div>
+
+<%- include('includes/footer') %>
