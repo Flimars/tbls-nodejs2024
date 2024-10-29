@@ -42,7 +42,7 @@ function remover(req, res) {
   res.redirect('/users');
 }
 
-functiondetail(req, res){
+function detail(req, res){
   const userId = req.params.id;
   const user = User.findById(userId);
   const emails = Email.getByUser(userId);
