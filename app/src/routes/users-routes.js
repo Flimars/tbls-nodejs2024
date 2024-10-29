@@ -7,8 +7,8 @@ router.get('/users', list);
 router.get('/users/create', create);
 router.post('/users/create', create);
 router.get('/users/edit/:id', edit);
-router.get('/users/detail', detail);
 router.post('/users/edit/:id', edit);
+router.get('/users/detail/:id', detail);
 router.post('/users/remover/:id', remover);
 
 export default router;

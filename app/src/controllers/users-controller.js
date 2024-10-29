@@ -42,7 +42,19 @@ function remover(req, res) {
   res.redirect('/users');
 }
 
-export { list, create, edit, remover };
+functiondetail(req, res){
+  const userId = req.params.id;
+  const user = User.findById(userId);
+  const emails = Email.getByUser(userId);
+  const phones = Phone.getByUser(userId);
+  if(user){
+    res.render('detail', {user, email, phone});
+  }else{
+    res.status(404).send("Usuário não cadastrado");
+  }
+}
+
+export { list, create, edit, remover, detail };
 
 
 
