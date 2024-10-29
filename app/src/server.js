@@ -8,7 +8,7 @@
 // const express = require('express');
 
 import express from 'express';
-import usersRoutes from './routes/users-routes.js';
+import usersRoutes from './routes/user-routes.js';
 
 const app = express();
 
@@ -31,7 +31,7 @@ app.get('/home', (req, res) => {
 });
 
 // importar as rotas de usuario e adicionar ao meu app
-import usersRouter from './routes/users-routes.js';
+import usersRouter from './routes/user-routes.js';
 app.use('/users', usersRouter);
 
 app.listen(3000, () => console.log("Server iniciou na porta 3000"));

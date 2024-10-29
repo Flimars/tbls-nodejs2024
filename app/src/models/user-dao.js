@@ -37,8 +37,8 @@ class UserDao {
     }
 
     save({ name, email, password, profile, createdAt }) {
-        const stmt = db.prepare('INSERT INTO users (name, email, password, created_at) VALUES (@name, @email, @password, @profile, @createdAt)');
-        stmt.run({name, email, password, createdAt});
+        const stmt = db.prepare('INSERT INTO users (name, email, password, profile, created_at) VALUES (@name, @email, @password, @profile, @createdAt)');
+        stmt.run({name, email, password, profile, createdAt});
     }
 
     findById(id) {

@@ -5,11 +5,11 @@ class User {
         this.profile = profile;
         this.password = password;
         
-        if (createdAt) {
-            this.createdAt = createdAt;
-        } else {
-            this.createdAt = Date.now();
-        }
+        // if (createdAt) {
+        //     this.createdAt = createdAt;
+        // } else {
+        //     this.createdAt = Date.now();
+        // }
 
         this.createdAt = createdAt ?? Date.now();
     }
