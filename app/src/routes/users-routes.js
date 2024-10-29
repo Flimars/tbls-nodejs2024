@@ -1,5 +1,5 @@
 import express from 'express';
-import { list, create, edit, remover } from '../controllers/users-controller.js';
+import { list, create, edit, detail, remover } from '../controllers/users-controller.js';
 
 const router = express.Router();
 
@@ -7,6 +7,7 @@ router.get('/users', list);
 router.get('/users/create', create);
 router.post('/users/create', create);
 router.get('/users/edit/:id', edit);
+router.get('/users/detail', detail);
 router.post('/users/edit/:id', edit);
 router.post('/users/remover/:id', remover);
 
