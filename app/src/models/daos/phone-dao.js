@@ -1,5 +1,4 @@
-import{db} from "../config/database.js";
-import{phone} from "./phone-model.js";
+import{db} from "../../config/database.js";
 
 class PhoneDao{
     list(userId){

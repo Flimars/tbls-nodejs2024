@@ -1,7 +1,8 @@
+/*
 // DAO DATA ACCESS OBJECT
 
 // DAO X REPOSITORY
-/*
+
 
     DAO => RELACIONADO DIRETAMENTE AO BANCO DE DADOS** DA TUA APLICAÇÃO
         LIST USER
@@ -23,8 +24,7 @@
 */
 
 
-import { db } from "../config/database.js";
-// import { User } from "./user-model.js";
+import { db } from "../../config/database.js";
 
 class UserDao {
 

@@ -1,5 +1,5 @@
 import express from 'express';
-import { list, create, edit, remove } from '../controllers/user-controller.js';
+import { list, create, edit, detail, remover } from '../controllers/user-controller.js';
 
 const router = express.Router();
 
@@ -8,7 +8,8 @@ router.get('/users/create', create);
 router.post('/users/create', create);
 router.get('/users/edit/:id', edit);
 router.post('/users/edit/:id', edit);
-router.post('/users/remove/:id', remove);
+router.get('/users/detail/:id', detail);
+router.post('/users/remover/:id', remover);
 
 export default router;
 

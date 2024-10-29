@@ -1,5 +1,4 @@
-import{db} from "../config/database.js";
-import{email} from "./email-model.js";
+import{db} from "../../config/database.js";
 
 class EmailDao{
     list(userId){

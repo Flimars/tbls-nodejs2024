@@ -1,10 +1,24 @@
-<%- include('includes/header', { title: 'Página Inicial' }) %>
-<%- include('includes/nav') %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('includes/header', { title: 'Página Inicial' }) %>
+  <!-- <%- include('includes/head') %> -->
+ 
+</head>
+<body>
+  <%- include('includes/nav') %>
+  <h1>Tela Inicial</h1>
+  
+  <!-- <%- include('includes/nav') %> -->
+  
+  <div class="container mx-auto mt-8">
+    <h1 class="text-2xl font-bold mb-4">Bem-vindo à Página Inicial</h1>
+    <p>Esta é a página inicial do sistema de gerenciamento de usuários.</p>
+  </div>
+  <%- include('includes/footer') %>
+</body>
+</html>
 
-<div class="container mx-auto mt-8">
-  <h1 class="text-2xl font-bold mb-4">Bem-vindo à Página Inicial</h1>
-  <p>Esta é a página inicial do sistema de gerenciamento de usuários.</p>
-</div>
 
-<%- include('includes/footer') %>
+
 

@@ -1,9 +1,14 @@
-import User from '../models/user-model.js';
-import Email from '../models/email-model.js';
-import Phone from '../models/phone-model.js';
-import { UserDao } from '../models/user-dao.js'; // Importa o DAO para gerenciar o acesso aos dados
+// import User from '../models/user-model.js';
+// import Email from '../models/email-model.js';
+// import Phone from '../models/phone-model.js';
+
+import { UserDao } from '../models/daos/user-dao.js'; // Importa o DAO para gerenciar o acesso aos dados
+import { EmailDao } from '../models/daos/email-dao.js';
+import { PhoneDao } from '../models/daos/phone-dao.js';
 
 const userDao = new UserDao();    // Cria uma instância do DAO global
+const emailDao = new EmailDao();
+const phoneDao = new PhoneDao();
 
 function list(req, res) {
   
@@ -49,13 +54,52 @@ function edit(req, res) {
   }
 }
 
+async function detail(req, res) {
+  const userId = req.params.id;
+
+  try {
+    // Recupera o usuário pelo ID usando UserDao
+    const user = await userDao.findById(userId);
+
+    // Se o usuário não existir, retorna um erro 404
+    if (!user) {
+      return res.status(404).send("Usuário não cadastrado");
+    }
+
+    // Recupera os emails e telefones associados ao usuário
+    const emails = await emailDao.getByUser(userId);
+    const phones = await phoneDao.getByUser(userId);
+
+    // Renderiza a página de detalhes com as informações do usuário, emails e telefones
+    res.render('detail', { user, emails, phones });
+  } catch (error) {
+    console.error("Erro ao buscar detalhes do usuário:", error);
+    res.status(500).send("Erro interno no servidor");
+  }
+}
+
 function remove(req, res) {
   const userId = req.params.id;
   userDao.delete(userId);   // Usa o método no DAO
   res.redirect('/users');
 }
 
-export { list, create, edit, remove };
+
+
+export { list, create, edit, detail, remove };
+
+/*
+// function detail(req, res){
+//   const userId = req.params.id;
+//   const user = userDao.findById(userId);
+//   const emails = Email.getByUser(userId);
+//   const phones = Phone.getByUser(userId);
+//   if(user){
+//     res.render('detail', {user, email, phone});
+//   }else{
+//     res.status(404).send("Usuário não cadastrado");
+//   }
+// }
 
 
 
