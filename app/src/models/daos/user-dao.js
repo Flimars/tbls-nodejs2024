@@ -42,7 +42,7 @@ class UserDao {
     }
 
     findById(id) {
-        const stmt = db.prepare('SELECT * FROM users WHERE id IS ?');
+        const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
         return stmt.get(id);
     }
 
@@ -80,4 +80,6 @@ class UserDao {
     }
 }
 
-export { UserDao}
+export {
+    UserDao
+}
