@@ -5,6 +5,7 @@ Repositório criado para os trabalhos realizados na disciplina de Web II.
 
 * Flávio de Medeiros Lima;
 * Katiane Santana Abreu Lima.
+* [Link Repositório GitHub](https://github.com/Flimars/trbls-nodejs2024)
 ___
 
 # Descrição do Trabalho:
