@@ -7,18 +7,18 @@ class EmailDao{
     }
 
     save({userId,email, isMain = 0}){
-        const stmt=db.prepare('INSERT INTO emails (user_id, email,is_primary) VALUES (@userId, @isMain');
+        const stmt=db.prepare('INSERT INTO emails (user_id, email,is_primary) VALUES (@userId, @isMain)');
         stmt.run({userId, email, isMain});
     }
 
     update(userId, oldEmail, newEmail){
-        const stmt = db.pragma('UPDATE emails SET email = @newEmail WHERE user_id = @nuserId AND email = @oldEmail');
+        const stmt = db.prepare('UPDATE emails SET email = @newEmail WHERE user_id = @userId AND email = @oldEmail');
         stmt.run({userId, oldEmail,newEmail});
     }
 
-    setPrimary(userId, email){
-        db.prepare('UPDATE emails SET is_primary = 0 WHERE user_id ?').run(userId);
-        db.prepare('UPDATE emails SET is_primary = 1 WHERE user_id =? AND email =?').run(userId,email);
+    getByUser(userId) {
+        const stmt = db.prepare(`SELECT * FROM emails WHERE user_id IS ?`);
+        return stmt.all(userId) || []; 
     }
 
     delete(userId, email){

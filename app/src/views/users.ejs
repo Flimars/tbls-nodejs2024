@@ -1,9 +1,8 @@
-<!-- views/users/users.ejs -->
 <%- include('includes/header', { title: 'User List' }) %>
 
 <div class="bg-white shadow-md rounded p-6">
   <form action="/users" method="GET" class="mb-4">
-    <input type="text" name="name" placeholder="Filter by name" class="p-2 border border-gray-300 rounded">
+    <input type="text" name="filter" value="<%= filter %>" placeholder="Filter by name" class="p-2 border border-gray-300 rounded">
     <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Filter</button>
   </form>
   
@@ -20,39 +19,41 @@
       </tr>
     </thead>
     <tbody>
-      <% users.forEach(user => { %>
-        <tr class="border-b border-gray-200 hover:bg-gray-100">
-          <td class="py-3 px-6"><%= user.id %></td>
-          <td class="py-3 px-6"><%= user.name %></td>
-          <td class="py-3 px-6"><%= user.cpf %></td>
-          <td class="py-3 px-6"><%= user.email %></td>
-          <td class="py-3 px-6"><%= user.phone %></td>
-          <td class="py-3 px-6"><%= user.role %></td>
-          <td class="py-3 px-6">
-            <a href="/user/<%= user.id %>" class="text-blue-500">View</a> | 
-            <a href="/updateUser/<%= user.id %>" class="text-yellow-500">Edit</a> | 
-            <a href="/deleteUser/<%= user.id %>" class="text-red-500">Delete</a>
-          </td>
+      <% if (users.length > 0) { %>
+        <% users.forEach(user => { %>
+          <tr class="border-b border-gray-200 hover:bg-gray-100">
+            <td class="py-3 px-6"><%= user.id %></td>
+            <td class="py-3 px-6"><%= user.name %></td>
+            <td class="py-3 px-6"><%= user.cpf %></td>
+            <td class="py-3 px-6"><%= user.email %></td>
+            <td class="py-3 px-6"><%= user.phone %></td>
+            <td class="py-3 px-6"><%= user.role %></td>
+            <td class="py-3 px-6">
+              <a href="/users/detail/<%= user.id %>" class="text-blue-500">View</a> | 
+              <a href="/users/edit/<%= user.id %>" class="text-yellow-500">Edit</a> | 
+              <a href="/remove/<%= user.id %>" class="text-red-500">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="7" class="text-center py-3">No users found.</td>
         </tr>
-      <% }) %>
+      <% } %>
     </tbody>
   </table>
   
-  <!-- Paginação -->
   <div class="flex justify-between items-center mt-4">
-    <span>Showing <%= pagination.current %> of <%= pagination.total %> entries</span>
-    <nav class="inline-flex shadow-sm">
-      <!-- Botões de paginação -->
-      <% if (pagination.prevPage) { %>
-        <a href="/users?page=<%= pagination.prevPage %>" class="px-3 py-1 bg-gray-300 text-gray-800">Previous</a>
+    <span>Showing <%= users.length %> entries out of <%= total %></span>
+    
+    <div class="pagination">
+      <% if (page > 1) { %>
+        <a href="/users?page=<%= page - 1 %>&filter=<%= filter %>" class="text-blue-500">Previous</a>
       <% } %>
-      <% for (let i = 1; i <= pagination.totalPages; i++) { %>
-        <a href="/users?page=<%= i %>" class="px-3 py-1 <%= i === pagination.currentPage ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-800' %>"><%= i %></a>
+      <% if (page * 5 < total) { %>
+        <a href="/users?page=<%= page + 1 %>&filter=<%= filter %>" class="text-blue-500">Next</a>
       <% } %>
-      <% if (pagination.nextPage) { %>
-        <a href="/users?page=<%= pagination.nextPage %>" class="px-3 py-1 bg-gray-300 text-gray-800">Next</a>
-      <% } %>
-    </nav>
+    </div>
   </div>
 </div>
 

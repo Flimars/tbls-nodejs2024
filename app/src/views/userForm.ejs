@@ -1,0 +1,32 @@
+<%- include('includes/header', { title: 'User Form' }) %>
+
+<div class="container mx-auto">
+  <h2 class="text-2xl font-bold mb-4">Create User</h2>
+  <form action="/users/create" method="POST">
+    <div class="mb-4">
+      <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+      <input type="text" id="name" name="name" required class="mt-1 block w-full p-2 border border-gray-300 rounded">
+    </div>
+    <div class="mb-4">
+      <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+      <input type="text" id="cpf" name="cpf" required class="mt-1 block w-full p-2 border border-gray-300 rounded">
+    </div>
+    <div class="mb-4">
+      <label for="profile" class="block text-sm font-medium text-gray-700">Profile</label>
+      <input type="text" id="profile" name="profile" required class="mt-1 block w-full p-2 border border-gray-300 rounded">
+    </div>
+    <div class="mb-4">
+      <label for="emails" class="block text-sm font-medium text-gray-700">Emails</label>
+      <input type="text" id="emails" name="emails" required class="mt-1 block w-full p-2 border border-gray-300 rounded">
+    </div>
+    <div class="mb-4">
+      <label for="phones" class="block text-sm font-medium text-gray-700">Phones</label>
+      <input type="text" id="phones" name="phones" required class="mt-1 block w-full p-2 border border-gray-300 rounded">
+    </div>
+    <div class="flex items-center justify-end">
+      <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>
+    </div>
+  </form>
+</div>
+
+<%- include('includes/footer') %>

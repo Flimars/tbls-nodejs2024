@@ -1,15 +1,15 @@
 import express from 'express';
-import { list, create, edit, detail, remover } from '../controllers/user-controller.js';
+import { list, create, edit, detail, remove } from '../controllers/user-controller.js';
 
 const router = express.Router();
 
-router.get('/users', list);
-router.get('/users/create', create);
-router.post('/users/create', create);
-router.get('/users/edit/:id', edit);
-router.post('/users/edit/:id', edit);
-router.get('/users/detail/:id', detail);
-router.post('/users/remover/:id', remover);
+router.get('/', list);
+router.get('/create', create);
+router.post('/create', create);
+router.get('/edit', edit);
+router.post('/edit/id', edit);
+router.get('/detail', detail);
+router.get('/remove/:id', remove);
 
 export default router;
 

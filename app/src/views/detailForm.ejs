@@ -9,18 +9,26 @@
   <p><strong>Role:</strong> <%= user.role %></p>
 
   <h3 class="text-xl font-semibold mt-4">Emails</h3>
-  <ul>
+<ul>
+  <% if (emails && emails.length > 0) { %>
     <% emails.forEach(email => { %>
       <li><%= email.email %> <%= email.is_primary ? '(Primary)' : '' %></li>
     <% }) %>
-  </ul>
+  <% } else { %>
+    <li>No emails found.</li>
+  <% } %>
+</ul>
 
-  <h3 class="text-xl font-semibold mt-4">Phones</h3>
-  <ul>
+<h3 class="text-xl font-semibold mt-4">Phones</h3>
+<ul>
+  <% if (phones && phones.length > 0) { %>
     <% phones.forEach(phone => { %>
       <li><%= phone.phone %> <%= phone.is_primary ? '(Primary)' : '' %></li>
     <% }) %>
-  </ul>
+  <% } else { %>
+    <li>No phones found.</li>
+  <% } %>
+</ul>
 </div>
 
 <%- include('includes/footer') %>

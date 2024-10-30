@@ -1,7 +1,7 @@
 <!-- views/users/addUser.ejs -->
 <%- include('includes/header', { title: 'Add User' }) %>
 
-<form action="/addUser" method="POST" class="bg-white shadow-md rounded p-6">
+<form action="/users/create" method="POST" class="bg-white shadow-md rounded p-6">
   <div class="mb-4">
     <label for="name" class="block text-gray-700">Name:</label>
     <input type="text" name="name" id="name" class="w-full p-2 border border-gray-300 rounded">
@@ -18,7 +18,8 @@
     <label for="phone" class="block text-gray-700">Phone:</label>
     <input type="text" name="phone" id="phone" class="w-full p-2 border border-gray-300 rounded">
   </div>
-  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Add User</button>
+  <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">Adicionar</button>
+  <a href="/users" class="inline-block mt-4 text-blue-600">Voltar</a>
 </form>
 
 <%- include('includes/footer') %>

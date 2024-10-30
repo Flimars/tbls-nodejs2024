@@ -42,7 +42,7 @@ class UserDao {
     }
 
     findById(id) {
-        const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
+        const stmt = db.prepare('SELECT * FROM users WHERE id IS ?');
         return stmt.get(id);
     }
 
@@ -53,21 +53,31 @@ class UserDao {
     }
     
     delete(id) {
-        const stmt = db.prepare('DELETE FROM users WHERE id = ? AND profile != "ADMIN"');
+        const stmt = db.prepare('DELETE FROM users WHERE id = ?');
         stmt.run(id);
     }
 
     paginate(page, filter) {
         const limit = 5;
         const offset = (page - 1) * limit;
-        const stmt = db.prepare(`SELECT * FROM users
-          WHERE name LIKE ?
-          LIMIT ? OFFSET ?
+        
+        // Consulta para obter os itens paginados
+        const stmtItems = db.prepare(`
+            SELECT * FROM users
+            WHERE name LIKE ?
+            LIMIT ? OFFSET ?
         `);
-        return stmt.all(`%${filter}%`, limit, offset);
+        const items = stmtItems.all(`%${filter}%`, limit, offset);
+        
+        // Consulta para contar o total de itens correspondentes ao filtro
+        const stmtCount = db.prepare(`
+            SELECT COUNT(*) as total FROM users
+            WHERE name LIKE ?
+        `);
+        const { total } = stmtCount.get(`%${filter}%`);
+        
+        return { items, total };
     }
 }
 
-export {
-    UserDao
-}
+export { UserDao}

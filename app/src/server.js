@@ -14,7 +14,7 @@ const app = express();
 
 app.use(express.json()); // trabalhando com apis
 app.use(express.urlencoded({
-    extended: false
+    extended: true
 })); // Server side rendering e sistemas web em geral
 
 app.set('view engine', 'ejs');  // seta a template engine
